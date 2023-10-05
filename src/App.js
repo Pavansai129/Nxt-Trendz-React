@@ -17,7 +17,21 @@ class App extends Component {
     cartList: [],
   }
 
-  //   TODO: Add your code for remove all cart items, increment cart item quantity, decrement cart item quantity, remove cart item
+  componentDidMount() {
+    const localSavedCartList = localStorage.getItem('cartList')
+    const savedCartList = JSON.parse(localSavedCartList)
+
+    if (savedCartList === null) {
+      this.setState({cartList: []})
+    } else {
+      this.setState({cartList: savedCartList})
+    }
+  }
+
+  componentDidUpdate() {
+    const {cartList} = this.state
+    localStorage.setItem('cartList', JSON.stringify(cartList))
+  }
 
   removeAllCartItems = () => {
     this.setState({cartList: []})
@@ -43,8 +57,6 @@ class App extends Component {
       })
       this.setState({cartList: updatedCartList})
     }
-
-    //   TODO: Update the code here to implement addCartItem
   }
 
   incrementCartItemQuantity = id => {

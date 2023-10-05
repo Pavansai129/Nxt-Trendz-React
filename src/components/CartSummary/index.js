@@ -1,5 +1,4 @@
 import CartContext from '../../context/CartContext'
-
 import './index.css'
 
 const CartSummary = () => (
